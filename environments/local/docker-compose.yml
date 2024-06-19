@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - SERVICES=s3,ec2,dynamodb,lambda,cloudwatch,cloudformation,iam,sts
+      - DEBUG=1
+      - CONFIG_FILE=/etc/localstack/localstack.conf
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=ap-northeast-2
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./localstack.conf:/etc/localstack/localstack.conf"
+      - "./localstack_data:/data/localstack"
