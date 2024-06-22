@@ -16,6 +16,6 @@ variable "use_localstack" {
 }
 
 variable "shared_credentials_file" {
-  description = "AWS 연결을 위한 Credentials 파일의 경로를 설정합니다."
-  default = "../../aws-credentials"
+  description = "AWS 연결을 위한 Credentials 파일의 경로를 설정합니다. (모듈 기준이 아닌, 환경 기준)"
+  type = string
 }
