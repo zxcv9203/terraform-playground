@@ -1,19 +1,12 @@
-output "user_names" {
-  value = [for user in module.iam_user : user.user_name]
+output "user_name" {
+  value = aws_iam_user.this.name
 }
 
-output "user_arns" {
-  value = [for user in module.iam_user : user.user_arn]
+output "user_arn" {
+  value = aws_iam_user.this.arn
 }
 
-output "policy_attachment_arns" {
-  value = {for k, v in aws_iam_user_policy_attachment.user_policy_attachment : k => v.id}
-}
-
-output "users_login_info" {
-  value = {
-    for user_name, user in module.iam_user : user_name => user.user_password
-  }
-  description = "사용자의 로그인 정보(아이디, 패스워드)"
-  sensitive   = true
+output "user_password" {
+  value     = aws_iam_user_login_profile.this[0].password
+  sensitive = true
 }
